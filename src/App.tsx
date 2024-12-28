@@ -8,7 +8,7 @@ function App() {
   const [color, setColor] = useState<boolean[]>([false, false, false, false, false, false, false, false, false]);
   const [winner, setWinner] = useState<string>("");
   const [winnerSelected, setWinnerSelected] = useState<boolean>(false);
-  const [count, setCount] = useState<number>(0);
+  let count = 0;
   let restart = false;
 
   const winningCombinations = [
@@ -54,15 +54,13 @@ function App() {
       return newState;
     });
 
-    setCount(c=>{
-      c = c+1;
-      if(c==9){
-        window.addEventListener('click', restartGame);
-        setWinnerSelected(true);
-        setWinner("No one");
-      }
-      return c;
-    })
+    count = count+1;
+    
+    if(count==9){
+      window.addEventListener('click', restartGame);
+      setWinnerSelected(true);
+      setWinner("No one");
+    }
 
     setChance(c => {
       return (c == 'X') ? 'O' : 'X';

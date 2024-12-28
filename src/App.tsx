@@ -22,7 +22,12 @@ function App() {
       restart = true;
     }
     else {
-      window.location.reload();
+      setColor([false, false, false, false, false, false, false, false, false]);
+      setWinner("");
+      setWinnerSelected(false);
+      setState(['0', '0', '0', '0', '0', '0', '0', '0', '0']);
+      setChance('X');
+      window.removeEventListener('click', restartGame);
     }
   }
 
@@ -41,7 +46,7 @@ function App() {
   }
 
   function handleClick(id: number) {
-    if(winnerSelected){
+    if (winnerSelected) {
       return;
     }
     if (state[id] !== '0') {
@@ -54,9 +59,9 @@ function App() {
       return newState;
     });
 
-    count = count+1;
-    
-    if(count==9){
+    count = count + 1;
+
+    if (count == 9) {
       window.addEventListener('click', restartGame);
       setWinnerSelected(true);
       setWinner("No one");
@@ -78,7 +83,7 @@ function App() {
   return (
     <div className='flex flex-col justify-center min-h-screen'>
       <h1 className='text-center text-2xl font-bold mb-10'>TIC-TAC-TOE</h1>
-      {!winnerSelected && <h1 className='text-center text-2xl font-bold mb-10'>{(chance==='X')?"1st player turn": "2nd player turn"}</h1>}
+      {!winnerSelected && <h1 className='text-center text-2xl font-bold mb-10'>{(chance === 'X') ? "1st player turn" : "2nd player turn"}</h1>}
       {winnerSelected && <h1 className='text-center text-2xl font-bold mb-10'>Winner is {winner}</h1>}
       {winnerSelected && <h1 className='text-center text-2xl font-bold mb-10'>Click again to restart</h1>}
       <div className='grid grid-cols-5 text-center'>
